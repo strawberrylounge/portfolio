@@ -28,9 +28,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/scss/main.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/js/modernizr-custom.js"
+            ]
           },
           "configurations": {
             "production": {
