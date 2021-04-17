@@ -1,3 +1,5 @@
-@import "./base/normalize";
-@import "./base/reset";
-@import "./base/typography";
+@use "./base/normalize.scss";
+@use "./base/reset.scss";
+@use "./base/typography.scss";
+
+@use "./layout/_flex.scss";

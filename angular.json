@@ -31,7 +31,6 @@
               "src/scss/main.scss"
             ],
             "scripts": [
-              "src/js/modernizr-custom.js"
             ]
           },
           "configurations": {

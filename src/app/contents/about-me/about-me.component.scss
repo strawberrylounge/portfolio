@@ -1,0 +1,39 @@
+#aboutMe {
+    padding:0 30px;
+    text-align: center;
+    > div {
+      span {
+        display:inline-block;
+        padding-right:10px;
+        letter-spacing: 0.025em;
+        &:not(:last-child) {
+          position: relative;
+          &::after {
+            content:"";
+            position:absolute;
+            top:50%;
+            right:3px;
+            width:4px;
+            height:4px;
+            border-radius: 100%;
+            background:#1a1c20;
+            transform:translateY(-50%);
+          }
+        }
+      }
+    }
+    p {
+      &:nth-child(2) {
+        font-weight: 900;
+        font-size: 5rem;
+        color:#ec524b;
+        line-height: 1.12;
+      }
+      &:last-child {
+        padding:50px;
+        font-size: 0.875rem;
+        text-align: left;
+        line-height:1.5;
+      }
+    }
+}
