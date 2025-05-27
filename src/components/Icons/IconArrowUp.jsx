@@ -1,4 +1,4 @@
-function IconArrowUp({ size = 24, color = "currentColor", ...props }) {
+function IconArrowUp({ size = 24, color = "currentColor" }) {
   return (
     <svg
       class="w-6 h-6 text-gray-800 dark:text-white"

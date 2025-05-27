@@ -535,8 +535,11 @@
   }
 
   /**
-  * main 태그에 position 추가
+  * React에서의 기본 세팅
   */
+  #root {
+    position: relative;
+  }
   #main {
     position: relative;
   }
