@@ -1,0 +1,35 @@
+@use "../styles/abstracts/variables" as *;
+
+.wrap {
+  section.section {
+    @include flexbox(center);
+    height: 100vh;
+    color: white;
+    text-align: center;
+    overflow-y: auto;
+    scroll-margin-top: 56px;
+    &.section01 {
+      background-color: color(deepblue);
+      .inner {
+        color: white;
+      }
+    }
+    &.section02 {
+      background: color(supernova);
+      .works {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        .work {
+          @include flexbox(center);
+          width: 400px;
+          height: 400px;
+          background: color(gray50);
+        }
+      }
+    }
+    &.section03 {
+      background: color(cosmic-blue);
+    }
+  }
+}
