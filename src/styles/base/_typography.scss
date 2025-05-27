@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+
+html,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+p,
+form,
+fieldset,
+input,
+label,
+table,
+tr,
+th,
+td,
+button,
+textarea,
+select,
+a {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #121212;
+  line-height: 160%;
+  letter-spacing: -0.5px;
+}
+
+/* =============================================================
+  mixins
+============================================================= */
+$typography-size: (
+  body: 16px,
+  body-sm: 15px,
+  body-s: 14px,
+  body-xs: 12px,
+  body-xxs: 11px,
+);
+@function typographySize($name) {
+  @return map-get($typography-size, $name);
+}

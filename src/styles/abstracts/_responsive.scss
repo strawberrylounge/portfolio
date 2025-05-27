@@ -1,0 +1,27 @@
+// Max Width Size
+$screen-full: 2559px;
+// Media Query Size
+$screen-desktop: 1919px;
+$screen-tablet: 1023px;
+$screen-mobile: 767px;
+
+@mixin mobile {
+  @media (max-width:#{$screen-mobile}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width:#{$screen-mobile + 1px}) and (max-width:#{$screen-tablet}) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width:#{$screen-tablet + 1px}) and (max-width:#{$screen-full}) {
+    @content;
+  }
+}
+@mixin full {
+  @media (min-width:#{$screen-full + 1px}) {
+    @content;
+  }
+}

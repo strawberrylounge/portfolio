@@ -1,0 +1,183 @@
+@use "../abstracts/variables" as *;
+
+/* =============================================================
+	Font
+============================================================= */
+.font-normal {
+  font-weight: 400;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-black {
+  font-weight: 900;
+}
+
+.font-12 {
+  font-size: 0.75rem;
+}
+.font-14 {
+  font-size: 0.875rem;
+}
+.font-15 {
+  font-size: 0.938rem;
+}
+.font-16 {
+  font-size: 1rem;
+}
+.font-18 {
+  font-size: 1.125rem;
+}
+.font-20 {
+  font-size: 1.25rem;
+}
+.font-22 {
+  font-size: 1.375rem;
+}
+.font-24 {
+  font-size: 1.5rem;
+}
+.font-28 {
+  font-size: 1.75rem;
+}
+
+/* =============================================================
+	Color
+============================================================= */
+.color-gray900 {
+  color: color(gray900) !important;
+}
+.color-gray800 {
+  color: color(gray800) !important;
+}
+.color-gray700 {
+  color: color(gray700) !important;
+}
+.color-gray600 {
+  color: color(gray600) !important;
+}
+.color-gray500 {
+  color: color(gray500) !important;
+}
+.color-gray400 {
+  color: color(gray400) !important;
+}
+.color-gray300 {
+  color: color(gray300) !important;
+}
+.color-gray200 {
+  color: color(gray200) !important;
+}
+.color-gray100 {
+  color: color(gray100) !important;
+}
+.color-gray50 {
+  color: color(gray50) !important;
+}
+.color-black {
+  color: color(black) !important;
+}
+.color-white {
+  color: color(white) !important;
+}
+
+/* =============================================================
+	Bg-color
+============================================================= */
+.bg-gray900 {
+  background-color: color(gray900) !important;
+}
+.bg-gray800 {
+  background-color: color(gray800) !important;
+}
+.bg-gray700 {
+  background-color: color(gray700) !important;
+}
+.bg-gray600 {
+  background-color: color(gray600) !important;
+}
+.bg-gray500 {
+  background-color: color(gray500) !important;
+}
+.bg-gray400 {
+  background-color: color(gray400) !important;
+}
+.bg-gray300 {
+  background-color: color(gray300) !important;
+}
+.bg-gray200 {
+  background-color: color(gray200) !important;
+}
+.bg-gray100 {
+  background-color: color(gray100) !important;
+}
+.bg-gray50 {
+  background-color: color(gray50) !important;
+}
+.bg-black {
+  background-color: color(black) !important;
+}
+.bg-white {
+  background-color: color(white) !important;
+}
+
+/* =============================================================
+	Layout
+============================================================= */
+// flex
+.flex {
+  @include flexbox();
+}
+
+// align
+.text-align-left {
+  text-align: left;
+}
+.text-align-center {
+  text-align: center;
+}
+
+/* =============================================================
+	Etc
+============================================================= */
+// 말줄임 1줄
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+// 말줄임 2줄
+.ellipsis-line2 {
+  display: -webkit-box;
+  overflow: hidden;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+// 말줄임 + 확장자
+.ellipsis-extension {
+  @include flexbox();
+  .name {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .extension {
+    white-space: nowrap;
+  }
+}
+
+// 줄 바꿈 - 단어 기준
+.word-keep-all {
+  word-break: keep-all;
+}
+
+// 레이아웃
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
