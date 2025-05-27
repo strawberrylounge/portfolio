@@ -72,14 +72,7 @@ function Home() {
 
   return (
     <div className="wrap">
-      {/* <nav
-        style={{ position: "fixed", right: "20px", top: "50%", zIndex: 1000 }}
-      >
-        <button onClick={() => scrollToSection("section01")}>Main</button>
-        <button onClick={() => scrollToSection("section02")}>Works</button>
-        <button onClick={() => scrollToSection("section03")}>Contact</button>
-      </nav> */}
-
+      {/* section01: introduction */}
       <section className="section section01">
         <div className="inner">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
@@ -88,6 +81,7 @@ function Home() {
           cupiditate est, quidem corporis molestias! Nemo!
         </div>
       </section>
+      {/* section02: works */}
       <section className="section section02">
         <div className="inner">
           <div className="works">
@@ -97,7 +91,10 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="section section03">Contact</section>
+      {/* section03: career */}
+      <section className="section section03"></section>
+      {/* section04: contact */}
+      <section className="section section04">Contact</section>
     </div>
   );
 }
