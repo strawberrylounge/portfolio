@@ -4,6 +4,8 @@ import Modal from "../components/Modal";
 
 import "./Home.scss";
 
+const SECTIONS = ["section01", "section02", "section03", "section04"];
+
 function Home() {
   const [activeSection, setActiveSection] = useState("section01");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,19 +20,17 @@ function Home() {
       e.preventDefault();
       isScrolling = true;
 
-      const currentIndex = ["section01", "section02", "section03"].indexOf(
-        activeSection
-      );
+      const currentIndex = SECTIONS.indexOf(activeSection);
       let nextIndex;
 
-      if (e.deltaY > 0 && currentIndex < 2) {
+      if (e.deltaY > 0 && currentIndex < SECTIONS.length - 1) {
         nextIndex = currentIndex + 1;
       } else if (e.deltaY < 0 && currentIndex > 0) {
         nextIndex = currentIndex - 1;
       }
 
       if (nextIndex !== undefined) {
-        const nextSection = ["section01", "section02", "section03"][nextIndex];
+        const nextSection = SECTIONS[nextIndex];
         scrollToSection(nextSection);
         setActiveSection(nextSection);
       }
@@ -85,18 +85,20 @@ function Home() {
 
   // Project Modal Datas
   const projectData01 = {
-    title: "Project Title",
-    company: "Company Name",
+    title: "Title",
+    company: "우리집",
     period: "2023.01.01 ~ 2023.03.01",
     role: "Frontend Developer",
     techStack: ["React", "JavaScript", "HTML", "CSS"], // Array
-    summary: "test test test",
+    summary: "요약입니다.",
   };
 
   return (
     <div className="wrap">
+      {/* <div className="stars"></div> */}
       {/* section01: introduction */}
       <section className="section section01">
+        <div className="start-large"></div>
         <div className="inner">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
           tenetur odio placeat laborum accusantium voluptatibus harum eveniet

@@ -1,4 +1,15 @@
+@use "sass:math";
+@use "sass:string";
 @use "../styles/abstracts/variables" as *;
+
+// 별 생성 함수
+@function multiple-box-shadow($n) {
+  $value: "#{math.random(2000)}px #{math.random(2000)}px #fff";
+  @for $i from 2 through $n {
+    $value: "#{$value}, #{math.random(2000)}px #{math.random(2000)}px #fff";
+  }
+  @return string.unquote($value);
+}
 
 .wrap {
   section.section {
@@ -6,15 +17,73 @@
     height: 100vh;
     color: white;
     text-align: center;
-    overflow-y: auto;
+    // overflow-y: auto;
+    overflow: hidden;
     scroll-margin-top: 56px;
     &.section01 {
-      background-color: color(deepblue);
+      // background-color: color(deepblue);
+
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+
+      // 별 레이어들
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+      }
+      // 작은 별들
+      &::before {
+        width: 1px;
+        height: 1px;
+        background: transparent;
+        box-shadow: multiple-box-shadow(700);
+        animation: animStar 50s linear infinite, shimmer 3s ease-in-out infinite;
+      }
+
+      // 중간 별들
+      &::after {
+        width: 2px;
+        height: 2px;
+        background: transparent;
+        box-shadow: multiple-box-shadow(200);
+        animation: animStar 100s linear infinite;
+      }
+      // 큰 별들을 위한 추가 요소
+      .stars-large {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 3px;
+        background: transparent;
+        box-shadow: multiple-box-shadow(100);
+        animation: animStar 150s linear infinite;
+        pointer-events: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 2000px;
+          width: 3px;
+          height: 3px;
+          background: transparent;
+          box-shadow: multiple-box-shadow(100);
+        }
+      }
+
       .inner {
+        z-index: 1;
+        position: relative;
         color: white;
       }
     }
     &.section02 {
+      position: relative;
       background: color(supernova);
       .works {
         display: grid;
@@ -25,11 +94,35 @@
           width: 400px;
           height: 400px;
           background: color(gray50);
+          cursor: pointer;
         }
       }
     }
     &.section03 {
       background: color(cosmic-blue);
     }
+    &.section04 {
+      background: color(nebula-gray);
+    }
+  }
+}
+
+// 별 애니메이션
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+// 반짝이는 효과 추가
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
   }
 }
