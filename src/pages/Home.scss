@@ -17,14 +17,14 @@
     height: 100vh;
     color: white;
     text-align: center;
-    // overflow-y: auto;
     overflow: hidden;
     scroll-margin-top: 56px;
     &.section01 {
-      // background-color: color(deepblue);
-
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-
+      background: radial-gradient(
+        ellipse at bottom,
+        #1b2735 0%,
+        color(deepblue) 100%
+      );
       // 별 레이어들
       &::before,
       &::after {
@@ -44,7 +44,6 @@
         box-shadow: multiple-box-shadow(700);
         animation: animStar 50s linear infinite, shimmer 3s ease-in-out infinite;
       }
-
       // 중간 별들
       &::after {
         width: 2px;
@@ -64,7 +63,6 @@
         box-shadow: multiple-box-shadow(100);
         animation: animStar 150s linear infinite;
         pointer-events: none;
-
         &::after {
           content: "";
           position: absolute;
@@ -75,7 +73,6 @@
           box-shadow: multiple-box-shadow(100);
         }
       }
-
       .inner {
         z-index: 1;
         position: relative;
