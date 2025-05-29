@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import IconClose from "./Icons/IconClose";
+
 import "./Modal.scss";
 
 function Modal({ isOpen, onClose, projectData, children }) {
@@ -46,55 +48,57 @@ function Modal({ isOpen, onClose, projectData, children }) {
     <div className={`modal ${isOpen ? "open" : ""}`}>
       <div className="modal-backdrop" onClick={onClose} />
       <div className="modal-content">
-        {/* 구조화된 헤더 영역 */}
+        {/* 헤더 영역 */}
         <div className="modal-header">
-          <h2>{title}</h2>
-          <button onClick={onClose}>×</button>
+          <h3>{title}</h3>
+          <button onClick={onClose} className="btn-modal-close">
+            <IconClose />
+          </button>
         </div>
 
-        {/* 기본 정보 영역 (구조화) */}
-        <div className="modal-info">
-          <div className="info-grid">
-            <div>회사: {company}</div>
-            <div>기간: {period}</div>
-            <div>역할: {role}</div>
+        <div className="modal-body">
+          {/* 기본 정보 영역 */}
+          <div className="modal-info">
+            <div className="info-grid">
+              <div>{company}</div>
+              <div>{period}</div>
+              <div>{role}</div>
+            </div>
+            {techStack && (
+              <div className="tech-stack">
+                {techStack.map((tech) => (
+                  <span key={tech} className="tech-tag">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+            {summary && <p className="summary">{summary}</p>}
           </div>
 
-          {techStack && (
-            <div className="tech-stack">
-              {techStack.map((tech) => (
-                <span key={tech} className="tech-tag">
-                  {tech}
-                </span>
+          {/* 이미지 영역 (있을 때만) */}
+          {images && (
+            <div className="modal-images">
+              {images.map((img, idx) => (
+                <img key={idx} src={img.src} alt={img.alt} />
               ))}
             </div>
           )}
 
-          {summary && <p className="summary">{summary}</p>}
+          {/* 자유 콘텐츠 영역 */}
+          <div className="modal-description">{children}</div>
+
+          {/* 링크 영역 (있을 때만) */}
+          {links && (
+            <div className="modal-links">
+              {links.map((link, idx) => (
+                <a key={idx} href={link.url} target="_blank" rel="noopener">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
-
-        {/* 이미지 영역 (있을 때만) */}
-        {images && (
-          <div className="modal-images">
-            {images.map((img, idx) => (
-              <img key={idx} src={img.src} alt={img.alt} />
-            ))}
-          </div>
-        )}
-
-        {/* 자유 콘텐츠 영역 */}
-        <div className="modal-body">{children}</div>
-
-        {/* 링크 영역 (있을 때만) */}
-        {links && (
-          <div className="modal-links">
-            {links.map((link, idx) => (
-              <a key={idx} href={link.url} target="_blank" rel="noopener">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
