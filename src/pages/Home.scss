@@ -97,16 +97,43 @@
     }
     &.section03 {
       position: relative;
-      .rocket-path {
-        width: 1000px;
-        height: 1400px;
-        fill: white;
+      .rocket-wrap {
+        .rocket-path {
+          width: 1000px;
+          height: 1400px;
+          fill: fff;
+        }
+        .rocket {
+          position: absolute;
+          z-index: 10;
+          width: 150px;
+          height: 150px;
+        }
       }
-      .rocket {
+      .career-wrap {
         position: absolute;
-        z-index: 10;
-        width: 150px;
-        height: 150px;
+        top: 0;
+        left: 50%;
+        @include flexbox();
+        flex-direction: column;
+        gap: 28px;
+        width: 100%;
+        max-width: 1000px;
+        text-align: left;
+        transform: translateX(-50%);
+        .career {
+          &:nth-child(odd) {
+            align-self: flex-start;
+          }
+          &:nth-child(even) {
+            align-self: flex-end;
+          }
+          .period,
+          .company,
+          .description .description-list li {
+            color: color(gray300);
+          }
+        }
       }
     }
     &.section04 {

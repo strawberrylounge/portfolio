@@ -6,10 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import Modal from "../components/Modal";
-import { RocketPath } from "../components/graphics/RocketPath";
-import { Rocket } from "../components/graphics/Rocket";
+import { RocketPath } from "../components/Graphics/RocketPath";
+import { Rocket } from "../components/Graphics/Rocket";
 
 import "./Home.scss";
+import Planet from "../components/graphics/Planet";
 
 const SECTIONS = ["section01", "section02", "section03", "section04"];
 const CAREERSECTION = "section03";
@@ -135,74 +136,99 @@ function Home() {
       {/* section03: career */}
       <section className="section section03">
         <div className="inner">
-          <RocketPath pathRef={pathRef} className="rocket-path" />
-          <Rocket className="rocket" />
-          {/* <div className="career-timeline">
-            <ul className="career career01">
-              <li className="period">2024.05 ~ 현재</li>
-              <li className="company">금성출판사</li>
-              <li className="role">프론트엔드 개발자</li>
-              <li className="description">
-                <ul className="description-list">
-                  <li>자사 사이트 유지보수 및 신규 개발</li>
-                  <li>퍼블리싱 및 프론트엔드 개발 전담</li>
-                </ul>
-              </li>
-            </ul>
-
-            <ul className="career career02">
-              <li className="period">2021.12 ~ 2022.09</li>
-              <li className="company">올리브유니온</li>
-              <li className="role">프론트엔드 개발자</li>
-              <li className="description">
-                <ul className="description-list">
-                  <li>CMS UI 개발 및 프론트엔드 개발</li>
-                  <li>SMS/이메일 인증 등 API 개발</li>
-                  <li>AWS Amplify, S3 호스팅 관리</li>
-                </ul>
-              </li>
-            </ul>
-
-            <ul className="career career03">
-              <li className="period">2020.02 ~ 2021.05</li>
-              <li className="company">어썸코드</li>
-              <li className="role">선임 퍼블리셔</li>
-              <li className="description">
-                <ul className="description-list">
-                  <li>퍼블리싱 팀 선임, 팀장 대행 역할</li>
-                  <li>
-                    스포츠알마냑(2021.1 오픈) 등 SPA 기반의 신규 프로젝트 UI
-                    개발
-                  </li>
-                </ul>
-              </li>
-            </ul>
-
-            <ul className="career career04">
-              <li className="period">2019.04 ~ 2019.12</li>
-              <li className="company">지엠솔루션 (LG CNS 파견)</li>
-              <li className="role">퍼블리셔</li>
-              <li className="description">
-                <ul className="description-list">
-                  <li>LG.com 글로벌 마이크로사이트 퍼블리싱</li>
-                  <li>대규모 사이트 유지보수 경험</li>
-                </ul>
-              </li>
-            </ul>
-
-            <div className="career-item career-item--collapsed">
-              <div className="period">2018.03 ~ 2018.09</div>
-              <div className="company">투게더앱스</div>
-              <div className="role">웹디자이너</div>
+          <div className="rocket-wrap">
+            <RocketPath pathRef={pathRef} className="rocket-path" />
+            <Rocket className="rocket" />
+          </div>
+          <div className="career-wrap">
+            <div className="career career01">
+              <Planet type={"earth"} />
+              <div className="career-info">
+                <div className="period">period</div>
+                <div className="company">
+                  name
+                  <span className="role">role</span>
+                </div>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>description 01</li>
+                    <li>description 02</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
-            <div className="career-item career-item--collapsed">
-              <div className="period">2016.08 ~ 2017.10</div>
-              <div className="company">아이포터</div>
-              <div className="role">웹디자이너</div>
+            <div className="career career02">
+              <Planet type={"mars"} />
+              <div className="career-info">
+                <div className="period">period</div>
+                <div className="company">
+                  name
+                  <span className="role">role</span>
+                </div>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>description 01</li>
+                    <li>description 02</li>
+                    <li>description 03</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="career career03">
+              <Planet type={"saturn"} />
+              <div className="career-info">
+                <div className="period">period</div>
+                <div className="company">
+                  name
+                  <span className="role">role</span>
+                </div>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>description 01</li>
+                    <li>description 02</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="career career04">
+              <Planet type={"sun"} />
+              <div className="career-info">
+                <div className="period">period</div>
+                <div className="company">
+                  name
+                  <span className="role">role</span>
+                </div>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>description 01</li>
+                    <li>description 02</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="career career05">
+              <Planet type={"moon"} />
+              <div className="career-info">
+                <div className="period">period</div>
+                <div className="company">name</div>
+                <div className="role">role</div>
+              </div>
+            </div>
+
+            <div className="career career06">
+              <Planet type={"neptune"} />
+              <div className="career-info">
+                <div className="period">period</div>
+                <div className="company">name</div>
+                <div className="role">role</div>
+              </div>
             </div>
           </div>
-          <div className="education-section">
+          {/* <div className="education-section">
             <h3>주요 교육</h3>
             <div className="education-item">
               <span className="period">2021.06 ~ 12</span>
