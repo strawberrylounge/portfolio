@@ -1,9 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-
-import gsap from "gsap";
-import { MotionPathPlugin } from "gsap/all";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useState } from "react";
 
 import Modal from "../components/Modal";
 import { RocketPath } from "../components/graphics/RocketPath";
@@ -12,14 +7,49 @@ import { Rocket } from "../components/graphics/Rocket";
 import "./Home.scss";
 
 const SECTIONS = ["section01", "section02", "section03", "section04"];
-const CAREERSECTION = "section03";
 
 function Home() {
   const [activeSection, setActiveSection] = useState("section01");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const pathRef = useRef(null);
+  /*
+  // Wheel 이벤트 활성화
+  useEffect(() => {
+    let isScrolling = false;
+
+    const handleWheel = (e) => {
+      if (isScrolling) return;
+
+      e.preventDefault();
+      isScrolling = true;
+
+      const currentIndex = SECTIONS.indexOf(activeSection);
+      let nextIndex;
+
+      if (e.deltaY > 0 && currentIndex < SECTIONS.length - 1) {
+        nextIndex = currentIndex + 1;
+      } else if (e.deltaY < 0 && currentIndex > 0) {
+        nextIndex = currentIndex - 1;
+      }
+
+      if (nextIndex !== undefined) {
+        const nextSection = SECTIONS[nextIndex];
+        scrollToSection(nextSection);
+        setActiveSection(nextSection);
+      }
+
+      setTimeout(() => {
+        isScrolling = false;
+      }, 1000); // 1초 쿨타임
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, [activeSection]);
+  */
 
   // Navigation 클릭 시 스크롤
   useEffect(() => {
@@ -43,40 +73,13 @@ function Home() {
     };
   }, []);
 
-  // 로켓 스크롤 애니메이션
-  gsap.registerPlugin(useGSAP);
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.registerPlugin(MotionPathPlugin);
-
-  useGSAP(() => {
-    if (pathRef.current) {
-      gsap.to(".rocket", {
-        motionPath: {
-          path: pathRef.current,
-          align: pathRef.current,
-          autoRotate: -80,
-          alignOrigin: [0.5, 0.5],
-        },
-        scrollTrigger: {
-          trigger: ".section03",
-          start: "top 10%",
-          end: "bottom 90%",
-          scrub: true,
-          onUpdate: (self) => {
-            gsap.to(".rocket-inner", {
-              rotate: () => (self.direction === -1 ? 0 : 180),
-              duration: 0.15,
-              transformOrigin: "center center",
-            });
-          },
-          ease: "none",
-          duration: 10,
-          immediateRender: true,
-          markers: true,
-        },
-      });
-    }
-  }, [pathRef]);
+  /*
+  // Wheel 이벤트를 위한 section 활성화
+  const scrollToSection = (sectionId) => {
+    const element = document.querySelector(`.${sectionId}`);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+  */
 
   // Handle Project Modals
   const openModal = (projectData) => {
@@ -100,21 +103,15 @@ function Home() {
 
   return (
     <div className="wrap">
-      <div className="stars-large"></div>
+      {/* <div className="stars"></div> */}
       {/* section01: introduction */}
       <section className="section section01">
+        <div className="start-large"></div>
         <div className="inner">
-          <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            tenetur odio placeat laborum accusantium voluptatibus harum eveniet
-            dignissimos blanditiis modi reprehenderit inventore possimus, ipsa
-            cupiditate est, quidem corporis molestias! Nemo! Lorem ipsum dolor
-            sit amet, consectetur adipisicing elit. Dolores laudantium cumque
-            atque possimus voluptatem officiis, animi nobis assumenda error
-            autem quo eveniet ut eos ad sit, culpa, placeat blanditiis!
-            Mollitia.
-          </p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
+          tenetur odio placeat laborum accusantium voluptatibus harum eveniet
+          dignissimos blanditiis modi reprehenderit inventore possimus, ipsa
+          cupiditate est, quidem corporis molestias! Nemo!
         </div>
       </section>
       {/* section02: works */}
@@ -135,7 +132,7 @@ function Home() {
       {/* section03: career */}
       <section className="section section03">
         <div className="inner">
-          <RocketPath pathRef={pathRef} className="rocket-path" />
+          <RocketPath className="path" />
           <Rocket className="rocket" />
           {/* <div className="career-timeline">
             <ul className="career career01">
