@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/all";
@@ -8,9 +9,13 @@ import { useGSAP } from "@gsap/react";
 import Modal from "../components/Modal";
 import { RocketPath } from "../components/Graphics/RocketPath";
 import { Rocket } from "../components/Graphics/Rocket";
+import Planet from "../components/Graphics/Planet";
+import IconMail from "../components/Icons/IconMail";
+import IconGithub from "../components/Icons/IconGithub";
+import IconLinkedin from "../components/Icons/IconLinkedin";
 
 import "./Home.scss";
-import Planet from "../components/graphics/Planet";
+import Form from "../components/Form";
 
 const SECTIONS = ["section01", "section02", "section03", "section04"];
 const CAREERSECTION = "section03";
@@ -243,20 +248,28 @@ function Home() {
         <div className="inner">
           <h2>Contact</h2>
           <div className="contact">
-            <div className="contact-method">
-              {/* <IconEmail /> */}
-              <span>email</span>
-              <span>raspberrylounge@gmail.com</span>
-            </div>
-            <div className="contact-method">
-              {/* <IconGithub /> */}
-              <span>github</span>
-              <span>github.com/strawberrylounge</span>
-            </div>
-            <div className="contact-method">
-              {/* <IconLinkedin /> */}
-              <span>linkedin</span>
-              <span>www.linkedin.com/in/blueberrylounge</span>
+            <Form />
+            <div className="contact-sns">
+              <div className="sns sns-github">
+                <Link
+                  to="https://github.com/strawberrylounge"
+                  target="_blank"
+                  className="sns-link"
+                >
+                  <IconGithub size={24} />
+                  <span className="sr-only">Github</span>
+                </Link>
+              </div>
+              <div className="sns sns-linkedin">
+                <Link
+                  to="https://www.linkedin.com/in/blueberrylounge"
+                  target="_blank"
+                  className="sns-link"
+                >
+                  <IconLinkedin size={24} />
+                  <span className="sr-only">Linkedin</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

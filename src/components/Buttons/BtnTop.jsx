@@ -2,6 +2,7 @@ import IconArrowUp from "../Icons/IconArrowUp";
 
 import "./BtnTop.scss";
 
+// [TODO] MUI Float Btn으로 변경
 function BtnTop({ onClick }) {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

@@ -922,11 +922,11 @@ const planetTypes = {
   },
 };
 
-const Planet = ({ type = "", className = "", ...props }) => {
+const Planet = ({ type = "", ...props }) => {
   const planetData = planetTypes[type];
 
   return (
-    <div className={`planet planet-${type} ${className}`} {...props}>
+    <div className={`planet planet-${type}`} {...props}>
       <svg
         viewBox={planetData.viewBox}
         className="planet-svg"

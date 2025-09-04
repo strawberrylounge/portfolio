@@ -116,27 +116,86 @@
         left: 50%;
         @include flexbox();
         flex-direction: column;
-        gap: 28px;
-        width: 100%;
+        gap: 68px;
+        width: 850px;
         max-width: 1000px;
         text-align: left;
         transform: translateX(-50%);
         .career {
+          @include flexbox();
+          gap: 24px;
           &:nth-child(odd) {
+            flex-flow: row-reverse;
             align-self: flex-start;
           }
           &:nth-child(even) {
             align-self: flex-end;
           }
-          .period,
-          .company,
-          .description .description-list li {
-            color: color(gray300);
+          .career-info {
+            @include flexbox(flex-start, flex-start);
+            flex-direction: column;
+            gap: 6px;
+            .period {
+              // font-weight: 500;
+              font-size: rem(12);
+              color: color(nebula-gray);
+            }
+            .company {
+              font-weight: 700;
+              font-size: rem(20);
+              color: color(starlight);
+              .role {
+                display: inline-block;
+                padding-left: 8px;
+                font-weight: 400;
+                font-size: rem(16);
+                color: color(nebula-gray);
+              }
+            }
+            .description {
+              .description-list {
+                @include flexbox();
+                flex-direction: column;
+                gap: 4px;
+                li {
+                  font-size: rem(14);
+                  color: color(nebula-gray);
+                }
+              }
+            }
           }
         }
       }
     }
     &.section04 {
+      .inner {
+        width: 100%;
+        h2 {
+          padding-bottom: 36px;
+          font-weight: 900;
+          font-size: rem(36);
+          color: color(white);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        .contact {
+          width: 980px;
+          max-width: 980px;
+          min-height: 420px;
+          margin: 0 auto;
+          padding: 36px 28px;
+          border-radius: 8px;
+          background: rgba(color(nebula-gray), $alpha: 0.65);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          .contact-sns {
+            @include flexbox(center);
+            gap: 12px;
+            .sns-link {
+              color: color(gray100);
+            }
+          }
+        }
+      }
     }
   }
 }

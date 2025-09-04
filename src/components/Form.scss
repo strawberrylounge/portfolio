@@ -1,0 +1,54 @@
+@use "../styles/abstracts/variables" as *;
+
+.contact-form {
+  form {
+    @include flexbox(flex-start);
+    flex-direction: column;
+    height: 100%;
+    .form-group {
+      width: 100%;
+      &:first-child {
+        @include flexbox(center);
+        gap: 18px;
+        // margin-bottom: 18px;
+        .input {
+          width: 50%;
+        }
+      }
+      &:nth-child(2) {
+        margin-top: 32px;
+      }
+      .input-message {
+        width: 100%;
+      }
+      // MUI custom css
+      .MuiTextField-root {
+      }
+      .MuiFormHelperText-root.Mui-error {
+        position: absolute;
+        left: 0;
+        bottom: -22px;
+      }
+    }
+    .btn-submit {
+      // align-self: flex-end;
+      margin: 24px 0;
+      &.loading {
+        animation: pulse 2s infinite;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
