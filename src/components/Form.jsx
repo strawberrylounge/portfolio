@@ -10,8 +10,6 @@ import Alert from "@mui/material/Alert";
 
 import "./Form.scss";
 
-// [TO-DO] form validation
-
 const customTheme = (outerTheme) =>
   createTheme({
     palette: {

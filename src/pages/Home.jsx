@@ -7,15 +7,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import Modal from "../components/Modal";
+import Form from "../components/Form";
 import { RocketPath } from "../components/Graphics/RocketPath";
 import { Rocket } from "../components/Graphics/Rocket";
 import Planet from "../components/Graphics/Planet";
-import IconMail from "../components/Icons/IconMail";
 import IconGithub from "../components/Icons/IconGithub";
 import IconLinkedin from "../components/Icons/IconLinkedin";
+import IconMedium from "../components/Icons/IconMedium";
 
 import "./Home.scss";
-import Form from "../components/Form";
 
 const SECTIONS = ["section01", "section02", "section03", "section04"];
 const CAREERSECTION = "section03";
@@ -55,7 +55,15 @@ function Home() {
   gsap.registerPlugin(MotionPathPlugin);
 
   useGSAP(() => {
+    window.scrollTo(0, 0);
+
     if (pathRef.current) {
+      // career 요소들 초기 상태 설정
+      gsap.set(".career", {
+        opacity: 0,
+        scale: 0.8,
+        y: 30,
+      });
       gsap.to(".rocket", {
         motionPath: {
           path: pathRef.current,
@@ -65,24 +73,75 @@ function Home() {
         },
         scrollTrigger: {
           trigger: ".section03",
-          start: "top 10%",
-          end: "bottom 90%",
+          start: "top 30%",
+          end: "bottom 70%",
           scrub: true,
+          // 새로고침 관련 이벤트 핸들러 추가
+          onRefresh: (self) => {
+            // ScrollTrigger가 새로고침될 때 스크롤 위치 재조정
+            if (window.scrollY > 0) {
+              window.scrollTo(0, 0);
+            }
+            // career 요소들도 초기 상태로 리셋
+            gsap.set(".career", {
+              opacity: 0,
+              scale: 0.8,
+              y: 30,
+            });
+          },
           onUpdate: (self) => {
             gsap.to(".rocket-inner", {
               rotate: () => (self.direction === -1 ? 0 : 180),
               duration: 0.15,
               transformOrigin: "center center",
             });
+
+            // 진행률에 따라 career 요소들 순차 표시
+            const progress = self.progress;
+            const careerElements = document.querySelectorAll(".career");
+
+            careerElements.forEach((career, index) => {
+              // 더 일찍 나타나도록 계산 조정
+              const showAt = (index / careerElements.length) * 0.7; // 70% 범위에서 완료
+
+              if (progress >= showAt && career.style.opacity !== "1") {
+                gsap.to(career, {
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                  duration: 0.3,
+                  ease: "power2.out",
+                  immediateRender: false, // 즉시 렌더링 방지
+                  overwrite: true, // 중복 애니메이션 덮어쓰기
+                });
+              }
+            });
           },
           ease: "none",
           duration: 10,
-          immediateRender: true,
-          markers: true,
+          immediateRender: false,
+          refreshPriority: -1,
+          markers: false,
         },
       });
     }
   }, [pathRef]);
+
+  // 추가로 페이지 로드 완료 후에도 한 번 더 보장
+  useEffect(() => {
+    const handleLoad = () => {
+      window.scrollTo(0, 0);
+      // ScrollTrigger 새로고침
+      ScrollTrigger.refresh();
+    };
+
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
+    }
+  }, []);
 
   // Handle Project Modals
   const openModal = (projectData) => {
@@ -149,87 +208,84 @@ function Home() {
             <div className="career career01">
               <Planet type={"earth"} />
               <div className="career-info">
-                <div className="period">period</div>
-                <div className="company">
-                  name
-                  <span className="role">role</span>
-                </div>
-                <div className="description">
-                  <ul className="description-list">
-                    <li>description 01</li>
-                    <li>description 02</li>
-                  </ul>
-                </div>
+                <div className="period">2016.08 ~ 2017.10</div>
+                <div className="company">아이포터</div>
+                <span className="role">웹 디자이너</span>
               </div>
             </div>
 
             <div className="career career02">
-              <Planet type={"mars"} />
+              <Planet type={"moon"} />
               <div className="career-info">
-                <div className="period">period</div>
-                <div className="company">
-                  name
-                  <span className="role">role</span>
-                </div>
-                <div className="description">
-                  <ul className="description-list">
-                    <li>description 01</li>
-                    <li>description 02</li>
-                    <li>description 03</li>
-                  </ul>
-                </div>
+                <div className="period">2018.03 ~ 2018.09</div>
+                <div className="company">투게더앱스</div>
+                <span className="role">웹 디자이너</span>
               </div>
             </div>
 
             <div className="career career03">
-              <Planet type={"saturn"} />
+              <Planet type={"mars"} />
               <div className="career-info">
-                <div className="period">period</div>
+                <div className="period">2019.04 ~ 2019.12</div>
                 <div className="company">
-                  name
-                  <span className="role">role</span>
+                  지엠솔루션<small>(LG CNS 파견)</small>
                 </div>
+                <span className="role">퍼블리셔</span>
                 <div className="description">
                   <ul className="description-list">
-                    <li>description 01</li>
-                    <li>description 02</li>
+                    <li>LG.com 글로벌 마이크로사이트 퍼블리싱</li>
+                    <li>대규모 사이트 유지보수 경험</li>
                   </ul>
                 </div>
               </div>
             </div>
 
             <div className="career career04">
-              <Planet type={"sun"} />
+              <Planet type={"saturn"} />
               <div className="career-info">
-                <div className="period">period</div>
-                <div className="company">
-                  name
-                  <span className="role">role</span>
-                </div>
+                <div className="period">2020.02 ~ 2021.05</div>
+                <div className="company">어썸코드</div>
+                <span className="role">선임 퍼블리셔</span>
                 <div className="description">
                   <ul className="description-list">
-                    <li>description 01</li>
-                    <li>description 02</li>
+                    <li>퍼블리싱 팀 선임, 팀장 대행 역할</li>
+                    <li>
+                      스포츠알마냑<small>(2021.1 오픈)</small> 등 SPA 기반의
+                      신규 프로젝트 UI 개발
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
 
             <div className="career career05">
-              <Planet type={"moon"} />
+              <Planet type={"neptune"} />
               <div className="career-info">
-                <div className="period">period</div>
-                <div className="company">name</div>
-                <div className="role">role</div>
+                <div className="period">2021.12 ~ 2022.09</div>
+                <div className="company">올리브유니온</div>
+                <span className="role">프론트엔드 개발자</span>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>CMS UI 개발 및 프론트엔드 개발</li>
+                    <li>SMS/이메일 인증 등 API 개발</li>
+                    <li>AWS Amplify, S3 호스팅 관리</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
             <div className="career career06">
-              <Planet type={"neptune"} />
+              <Planet type={"sun"} />
               <div className="career-info">
-                <div className="period">period</div>
-                <div className="company">name</div>
-                <div className="role">role</div>
+                <div className="period">2024.05 ~ 현재</div>
+                <div className="company">금성출판사</div>
+                <span className="role">프론트엔드 개발자</span>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>자사 사이트 유지보수 및 신규 개발</li>
+                    <li>퍼블리싱 및 프론트엔드 개발 전담</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -268,6 +324,16 @@ function Home() {
                 >
                   <IconLinkedin size={24} />
                   <span className="sr-only">Linkedin</span>
+                </Link>
+              </div>
+              <div className="sns sns-medium">
+                <Link
+                  to="https://medium.com/@raspberrylounge"
+                  target="_blank"
+                  className="sns-link"
+                >
+                  <IconMedium size={24} />
+                  <span className="sr-only">Medium</span>
                 </Link>
               </div>
             </div>

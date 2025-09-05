@@ -545,4 +545,13 @@
   #main {
     position: relative;
   }
+
+  /* CSS - 스크롤 동작 완전 제어 */
+  html {
+    scroll-behavior: auto !important;
+    overflow-anchor: none; /* 스크롤 앵커링 비활성화 */
+  }
+  body {
+    overflow-anchor: none;
+  }
 }

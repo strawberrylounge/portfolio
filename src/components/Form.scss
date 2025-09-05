@@ -10,7 +10,6 @@
       &:first-child {
         @include flexbox(center);
         gap: 18px;
-        // margin-bottom: 18px;
         .input {
           width: 50%;
         }
