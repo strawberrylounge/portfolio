@@ -25,3 +25,17 @@ $screen-mobile: 767px;
     @content;
   }
 }
+
+// 클래스
+.m-only {
+  display: none;
+  @include mobile {
+    display: block;
+  }
+}
+.pc-only {
+  display: block;
+  @include mobile {
+    display: none;
+  }
+}
