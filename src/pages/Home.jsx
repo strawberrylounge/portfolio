@@ -127,22 +127,6 @@ function Home() {
     }
   }, [pathRef]);
 
-  // 추가로 페이지 로드 완료 후에도 한 번 더 보장
-  useEffect(() => {
-    const handleLoad = () => {
-      window.scrollTo(0, 0);
-      // ScrollTrigger 새로고침
-      ScrollTrigger.refresh();
-    };
-
-    if (document.readyState === "complete") {
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
-    }
-  }, []);
-
   // Handle Project Modals
   const openModal = (projectData) => {
     setSelectedProject(projectData);

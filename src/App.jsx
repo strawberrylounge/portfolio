@@ -7,8 +7,6 @@ import Home from "./pages/Home.jsx";
 import About from "./pages/About/About.jsx";
 import Work from "./pages/Works/Works.jsx";
 
-import "./styles/base/_reset.scss";
-
 function App() {
   // app.jsx 또는 최상위 컴포넌트
   useEffect(() => {
