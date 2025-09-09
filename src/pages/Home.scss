@@ -3,11 +3,13 @@
 
 @use "../styles/abstracts/variables" as *;
 
+@forward "../styles/abstracts/animation";
+
 // 별 생성 함수
 @function multiple-box-shadow($n) {
-  $value: "#{math.random(4000)}px #{math.random(4000)}px #fff";
+  $value: "#{math.random(6000)}px #{math.random(6000)}px #fff";
   @for $i from 2 through $n {
-    $value: "#{$value}, #{math.random(4000)}px #{math.random(4000)}px #fff";
+    $value: "#{$value}, #{math.random(6000)}px #{math.random(6000)}px #fff";
   }
   @return string.unquote($value);
 }
@@ -61,7 +63,7 @@
     &::after {
       content: "";
       position: absolute;
-      top: 4000px;
+      top: 6000px;
       width: 3px;
       height: 3px;
       background: transparent;
@@ -73,17 +75,103 @@
     min-height: 920px;
     color: white;
     text-align: center;
-    &.section01 {
+    &.section01,
+    &.section02 {
       .inner {
         z-index: 2;
         position: relative;
-        h2,
-        p {
-          color: white;
+        h2.section-title {
+          font-weight: 900;
+          font-size: rem(72);
+          color: color(white);
+          letter-spacing: 0.5px;
+          text-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
+            0 0 40px rgba(255, 255, 255, 0.15),
+            0 0 60px rgba(255, 255, 255, 0.05);
+        }
+        p.section-contents-text {
+          margin-top: 32px;
+          font-weight: 400;
+          font-size: rem(22);
+          color: color(gray300);
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+          line-height: 1.6;
+        }
+      }
+    }
+    &.section01 {
+      position: relative;
+      .astronaut {
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        animation: float 6s ease-in-out infinite;
+      }
+      .inner {
+        h2.section-title {
+          .typing-text {
+            display: inline-block;
+          }
+          .cursor {
+            display: inline-block;
+            margin-left: 2px;
+            color: color(white);
+            animation: blink 1s infinite;
+          }
+        }
+        p.section-contents-text {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.8s ease;
+          &.show {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       }
     }
     &.section02 {
+      .inner {
+        h2.section-title {
+          @include flexbox(center);
+          .flip-container {
+            position: relative;
+            display: inline-block;
+            min-width: 420px;
+            height: 120px;
+            overflow: hidden;
+            .flip-words {
+              position: relative;
+              height: 100%;
+              margin-top: 2px; // section-title과 정렬 맞춤
+              .flip-word {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                font-weight: 900;
+                font-size: rem(72);
+                color: color(saturn-gold);
+                transform: translate(-50%, 100%);
+                opacity: 0;
+                transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                &.active {
+                  transform: translate(-50%, 0);
+                  opacity: 1;
+                  text-shadow: 0 0 5px rgba(242, 211, 119, 0.5),
+                    0 0 10px rgba(242, 211, 119, 0.5),
+                    0 0 15px rgba(242, 211, 119, 0.3);
+                }
+                &:not(.active) {
+                  animation: slideOut 0.6s ease-in-out;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.section03 {
       position: relative;
       .works {
         display: grid;
@@ -98,7 +186,7 @@
         }
       }
     }
-    &.section03 {
+    &.section04 {
       position: relative;
       .rocket-wrap {
         .rocket-path {
@@ -179,7 +267,7 @@
         }
       }
     }
-    &.section04 {
+    &.section05 {
       .inner {
         width: 100%;
         h2 {
@@ -209,25 +297,5 @@
         }
       }
     }
-  }
-}
-
-// 별 애니메이션
-@keyframes animStar {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-4000px);
-  }
-}
-// 반짝이는 효과 추가
-@keyframes shimmer {
-  0%,
-  100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
   }
 }

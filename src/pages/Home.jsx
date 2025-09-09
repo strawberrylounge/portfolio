@@ -11,19 +11,22 @@ import Form from "../components/Form";
 import { RocketPath } from "../components/Graphics/RocketPath";
 import { Rocket } from "../components/Graphics/Rocket";
 import Planet from "../components/Graphics/Planet";
+import { Astronaut } from "../components/Graphics/Astronaut";
 import IconGithub from "../components/Icons/IconGithub";
 import IconLinkedin from "../components/Icons/IconLinkedin";
 import IconMedium from "../components/Icons/IconMedium";
 
 import "./Home.scss";
 
-const SECTIONS = ["section01", "section02", "section03", "section04"];
-const CAREERSECTION = "section03";
-
 function Home() {
   const [activeSection, setActiveSection] = useState("section01");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [typingText, setTypingText] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
+  const [flipWords] = useState(["Designer's", "Creative", "Technical"]);
+  const [currentFlipIndex, setCurrentFlipIndex] = useState(0);
+  // const [animationsComplete, setAnimationsComplete] = useState(false);
 
   const pathRef = useRef(null);
 
@@ -49,6 +52,37 @@ function Home() {
     };
   }, []);
 
+  // section01 타이핑 애니메이션
+  useEffect(() => {
+    const text = "Exploring the Web Universe";
+    let index = 0;
+
+    const timer = setInterval(() => {
+      if (index <= text.length) {
+        setTypingText(text.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+        // 타이핑 완료 후 설명 텍스트 표시
+        setTimeout(() => {
+          setShowDescription(true);
+          // setAnimationsComplete(true);
+        }, 500);
+      }
+    }, 100); // 타이핑 속도 조절
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // section02 플립 애니메이션
+  useEffect(() => {
+    const flipTimer = setInterval(() => {
+      setCurrentFlipIndex((prev) => (prev + 1) % flipWords.length);
+    }, 3000); // 3초마다 변경
+
+    return () => clearInterval(flipTimer);
+  }, [flipWords.length]);
+
   // 로켓 스크롤 애니메이션
   gsap.registerPlugin(useGSAP);
   gsap.registerPlugin(ScrollTrigger);
@@ -57,6 +91,7 @@ function Home() {
   useGSAP(() => {
     window.scrollTo(0, 0);
 
+    // 애니메이션이 완료된 후에만 ScrollTrigger 실행 추기
     if (pathRef.current) {
       // career 요소들 초기 상태 설정
       gsap.set(".career", {
@@ -72,7 +107,7 @@ function Home() {
           alignOrigin: [0.5, 0.5],
         },
         scrollTrigger: {
-          trigger: ".section03",
+          trigger: ".section04",
           start: "top 30%",
           end: "bottom 70%",
           scrub: true,
@@ -152,22 +187,102 @@ function Home() {
       <div className="stars-large"></div>
       {/* section01: introduction */}
       <section className="section section01">
+        <Astronaut className="astronaut" />
         <div className="inner">
-          <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            tenetur odio placeat laborum accusantium voluptatibus harum eveniet
-            dignissimos blanditiis modi reprehenderit inventore possimus, ipsa
-            cupiditate est, quidem corporis molestias! Nemo! Lorem ipsum dolor
-            sit amet, consectetur adipisicing elit. Dolores laudantium cumque
-            atque possimus voluptatem officiis, animi nobis assumenda error
-            autem quo eveniet ut eos ad sit, culpa, placeat blanditiis!
-            Mollitia.
+          <h2 className="section-title">
+            <span className="typing-text">{typingText}</span>
+            <span className="cursor">|</span>
+          </h2>
+          <p
+            className={`section-contents-text ${showDescription ? "show" : ""}`}
+          >
+            웹 기술은 우주처럼 방대하고 다양합니다.
+            <br className="pc-only" />이 넓고 깊은 분야에서 웹 디자이너로 시작해
+            프론트엔드 개발자로
+            <br className="pc-only" />
+            성장해온 저의 여정과 앞으로 나아가고 싶은 방향을 소개합니다.
           </p>
+          {/* <p>
+            웹 기술은 우주 같아요. 너무나 다양하고 방대한 기술이 존재해 누가
+            IT업계에서 일하고 싶은데 혹은 개발자가 되고 싶은데 뭐부터 배워야 돼?
+            라고 물으면 선뜻 대답하기가 어렵죠. 이처럼 넓고 깊은 이 분야에서
+            제가 걸어온 길과 앞으로 나아가고 싶은 방향을 소개해 볼게요.
+          </p> */}
         </div>
       </section>
-      {/* section02: works */}
+      {/* section02: introduction 2 */}
       <section className="section section02">
+        <div className="inner">
+          <h2 className="section-title">
+            A Developer with
+            <div className="flip-container">
+              <div className="flip-words">
+                {flipWords.map((word, index) => (
+                  <div
+                    key={index}
+                    className={`flip-word ${
+                      index === currentFlipIndex ? "active" : ""
+                    }`}
+                  >
+                    {word}
+                  </div>
+                ))}
+              </div>
+            </div>
+            Eyes
+          </h2>
+          <p className="section-contents-text">
+            아 텍스트 존나 어려워어여뤄여뭐라고 정리하지?
+            <br className="pc-only" />
+            미치겠네요 그러니까 저는 그냥 만들고 있습니다
+            <br className="pc-only" />
+            알겠죠? 모르면 말아
+            <br className="pc-only" />
+            최대 5줄까지 정리해야 할지도
+            <br className="pc-only" />
+            모르겠다. 텍스트텍스트 가나다라마바사아자차카타파하!
+          </p>
+          {/* 웹 디자인의 세계로 이끌었습니다. HTML과 CSS로 아름다운 페이지를
+            구현하는 과정에서 큰 기쁨을 느꼈고, JavaScript 애니메이션을 통해
+            새로운 도전의 재미를 발견했습니다. 웹 디자이너에서 퍼블리셔, 그리고
+            프론트엔드 개발자로의 전환 과정에서 웹 접근성, 반응형 웹, Angular와
+            TypeScript까지 다양한 기술을 익혔습니다. 새로운 것에 대한 끊임없는
+            호기심이 저를 성장시키는 원동력입니다. 디자이너의 시각을 가진
+            개발자로서, 팀 간의 소통을 원활하게 하는 것이 저의 가장 큰
+            강점이라고 생각합니다. */}
+          {/* <p>
+            어릴 적 저의 꿈은 배우였습니다. 프랑스에서 연극과 영화를 공부하며
+            저의 열정을 쏟았습니다. 그러나 가정 사정으로 한국으로 돌아오게
+            되었습니다. 이런 변화의 중심에서 저는 가능한 한 저와 관련된 분야에서
+            일하고 싶었습니다. 그렇게 시작된 영상 디자인에 대한 탐색은 웹
+            디자인의 세계를 만나게 했습니다. 웹 디자인은 저에게 끊임없는 매력을
+            안겨주었습니다. 클라이언트의 피드백을 받고, 제 작업물이 실제로 웹
+            사이트에 반영되는 과정은 끊임없는 보람을 주었습니다. 특히 HTML와
+            CSS를 사용한 페이지 디자인은 제게 큰 흥미를 불러일으켰습니다. 코드
+            몇 줄로도 아름다운 페이지를 구현할 수 있다는 사실은 제게 큰 기쁨을
+            안겨주었습니다. 또한, CSS와 javaScript로 애니메이션을 구현하는
+            과정에서도 새로운 도전과 재미를 느꼈습니다. 퍼블리셔로 전직을 한 뒤,
+            웹 접근성에 대해 배우게 되었습니다. 그리고 점점 더 많은 학습을 하게
+            되었습니다. 웹 호환성, 반응형 웹사이트 제작 등, 퍼블리셔로서 필요한
+            기술들을 습득하였습니다. 더불어 당시 재직 중이었던 회사에서 Angular,
+            TypeScript, SCSS를 다루며 개발을 할 수 있는 기회를 얻게 되었습니다.
+            결국 프론트엔드 개발자로 진로를 정하게 되었고, 약 6개월 동안 국가
+            지원 풀스택 개발자 양성 과정을 통해 다양한 기술을 익혔습니다. 이
+            과정은 짧은 시간 동안 많은 내용을 학습해야 했기 때문에 모든 것을
+            깊게 파고들지는 못했지만, 웹 사이트 개발 프로세스를 확실히 이해할 수
+            있었습니다. 또한, 다양한 개발 분야 중 제가 가진 강점을 발견하는
+            데에도 도움이 되었습니다. 이를 통해 저는 프론트엔드 개발자로서
+            성장하고 있습니다. 저는 항상 새로운 것에 대한 호기심을 갖고
+            있습니다. 제 호기심은 새로운 기술을 익히는 데 큰 도움이 되었습니다.
+            전직을 두 번 한 것도 호기심에 대한 결과라고 생각합니다. 그리고 그
+            덕분에, 저는 웹 디자이너의 업무를 더 잘 이해하는 퍼블리셔, 그리고
+            프론트엔드 개발자가 되었습니다. 이 점이 타 팀과의 소통에 매우 도움이
+            되고 제 장점이라고 생각합니다."
+          </p> */}
+        </div>
+      </section>
+      {/* section03: works */}
+      <section className="section section03">
         <div className="inner">
           <div className="works">
             <div
@@ -181,8 +296,8 @@ function Home() {
           </div>
         </div>
       </section>
-      {/* section03: career */}
-      <section className="section section03">
+      {/* section04: career */}
+      <section className="section section04">
         <div className="inner">
           <div className="rocket-wrap">
             <RocketPath pathRef={pathRef} className="rocket-path" />
@@ -283,8 +398,8 @@ function Home() {
           </div> */}
         </div>
       </section>
-      {/* section04: contact */}
-      <section className="section section04">
+      {/* section05: contact */}
+      <section className="section section05">
         <div className="inner">
           <h2>Contact</h2>
           <div className="contact">
