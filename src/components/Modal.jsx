@@ -44,6 +44,54 @@ function Modal({ isOpen, onClose, projectData, children }) {
   const { title, company, period, role, techStack, images, links, summary } =
     projectData || {};
 
+  // 기술 스택별 클래스 매핑
+  const getTechClass = (tech) => {
+    const techClassMap = {
+      // 마크업
+      HTML: "default",
+
+      // 스타일
+      SCSS: "style",
+      CSS: "style",
+      Tailwind: "style",
+      Bootstrap: "style",
+      "Material UI": "style",
+      "Styled Components": "style",
+      Emotion: "style",
+
+      // 프론트엔드 스크립트
+      React: "script",
+      JavaScript: "script",
+      TypeScript: "script",
+      "Next.js": "script",
+      "Vue.js": "script",
+      Angular: "script",
+      "Nuxt.js": "script",
+
+      // 웹서버
+      "Node.js": "server",
+      "Nest.js": "server",
+      Spring: "server",
+      Express: "server",
+      Redis: "server",
+
+      // 배포
+      AWS: "deploy",
+      Netlify: "deploy",
+      Vercel: "deploy",
+
+      // 협업툴
+      Figma: "tool",
+      Zeplin: "tool",
+      Slack: "tool",
+      Notion: "tool",
+      github: "tool",
+      gitlab: "tool",
+    };
+
+    return techClassMap[tech] || "default";
+  };
+
   return (
     <div className={`modal ${isOpen ? "open" : ""}`}>
       <div className="modal-backdrop" onClick={onClose} />
@@ -52,7 +100,7 @@ function Modal({ isOpen, onClose, projectData, children }) {
         <div className="modal-header">
           <h3>{title}</h3>
           <button onClick={onClose} className="btn-modal-close">
-            <IconClose />
+            <IconClose size={18} color="#999" />
           </button>
         </div>
 
@@ -60,14 +108,23 @@ function Modal({ isOpen, onClose, projectData, children }) {
           {/* 기본 정보 영역 */}
           <div className="modal-info">
             <div className="info-grid">
-              <div>{company}</div>
-              <div>{period}</div>
-              <div>{role}</div>
+              <div className="info">
+                소속:
+                <span>{company}</span>
+              </div>
+              <div className="info">
+                기간:
+                <span>{period}</span>
+              </div>
+              <div className="info">
+                역할:
+                <span>{role}</span>
+              </div>
             </div>
             {techStack && (
               <div className="tech-stack">
                 {techStack.map((tech) => (
-                  <span key={tech} className="tech-tag">
+                  <span key={tech} className={`tag-tech ${getTechClass(tech)}`}>
                     {tech}
                   </span>
                 ))}

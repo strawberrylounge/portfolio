@@ -63,7 +63,7 @@
     &::after {
       content: "";
       position: absolute;
-      top: 6000px;
+      top: 3000px;
       width: 3px;
       height: 3px;
       background: transparent;
@@ -96,6 +96,7 @@
           color: color(gray300);
           text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
           line-height: 1.6;
+          word-break: keep-all;
         }
       }
     }
@@ -104,8 +105,8 @@
       .astronaut {
         z-index: 1;
         position: absolute;
-        left: 0;
-        bottom: 0;
+        left: 15%;
+        bottom: 56px;
         animation: float 6s ease-in-out infinite;
       }
       .inner {

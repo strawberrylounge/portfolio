@@ -21,49 +21,105 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba($color: #000, $alpha: 0.7);
+    background: rgba($color: color(black), $alpha: 0.7);
   }
   .modal-content {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 90%;
-    max-width: 90%;
+    max-width: 1000px;
     max-height: 90vh;
     border-radius: 8px;
-    background: white;
-    transform: translate(-50%, -50%);
     overflow-y: auto;
+    background: color(white);
+    transform: translate(-50%, -50%);
     transition: transform 0.3s ease;
     .modal:not(.open) & {
       transform: translate(-50%, -50%) scale(0.8);
     }
     .modal-header {
       @include flexbox(space-between);
-      padding: 16px 24px;
+      padding: 12px 24px;
       border-bottom: 1px solid color(gray50);
       h3 {
-        font-size: 20px;
         font-weight: 700;
+        font-size: rem(20);
+      }
+      .btn-modal-close {
+        width: 18px;
+        height: 18px;
       }
     }
     .modal-body {
       padding: 16px 24px;
       .modal-info {
+        .info-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding-bottom: 24px;
+          .info {
+            @include flexbox(flex-start);
+            gap: 8px;
+            color: color(gray600);
+            & > span {
+              font-weight: 700;
+              color: color(gray900);
+            }
+          }
+        }
         .tech-stack {
           @include flexbox();
-          gap: 4px;
-          .tech-tag {
+          gap: 6px;
+          .tag-tech {
             display: inline-block;
             min-width: 50px;
             height: 26px;
             padding: 0 12px;
-            border-radius: 6px;
-            background: color(gray300);
-            color: #fff;
+            border-radius: 4px;
+            font-size: rem(14);
             text-align: center;
             line-height: 26px;
+
+            &.default {
+              background: color(gray100);
+              color: color(gray700);
+            }
+            &.style {
+              background: color(mars-red);
+              color: color(white);
+            }
+            &.script {
+              background: color(cosmic-blue);
+              color: color(white);
+            }
+            &.server {
+              background: color(saturn-gold);
+              color: color(gray900);
+            }
+            &.deploy {
+              background: color(starlight);
+              color: color(deepblue);
+            }
+            &.tool {
+              background: color(nebula-gray);
+              color: color(white);
+            }
           }
+        }
+        .summary {
+          padding: 24px 0;
+          border-bottom: 1px solid color(gray50);
+          font-size: rem(16);
+          color: color(gray600);
+          line-height: 1.6;
+        }
+      }
+      .project-details {
+        padding-top: 36px;
+        h3 {
+          font-weight: 700;
         }
       }
     }
