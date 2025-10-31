@@ -10,8 +10,19 @@
       &:first-child {
         @include flexbox(center);
         gap: 18px;
+        @include mobile {
+          display: block;
+        }
         .input {
           width: 50%;
+          @include mobile {
+            width: 100%;
+          }
+          &:first-child {
+            @include mobile {
+              margin-bottom: 16px;
+            }
+          }
         }
       }
       &:nth-child(2) {
@@ -28,10 +39,22 @@
         left: 0;
         bottom: -22px;
       }
+      .MuiInput-input {
+        @include mobile {
+          font-size: rem(14);
+        }
+      }
+      .MuiFormLabel-root {
+        @include mobile {
+          font-size: rem(14);
+        }
+      }
     }
     .btn-submit {
-      // align-self: flex-end;
       margin: 24px 0;
+      @include mobile {
+        width: 140px;
+      }
       &.loading {
         animation: pulse 2s infinite;
         transition: all 0.3s ease;

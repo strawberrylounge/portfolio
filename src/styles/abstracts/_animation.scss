@@ -7,6 +7,14 @@
     transform: translateY(-4000px);
   }
 }
+@keyframes animStarMobile {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2500px);
+  }
+}
 // 반짝이는 효과 추가
 @keyframes shimmer {
   0%,

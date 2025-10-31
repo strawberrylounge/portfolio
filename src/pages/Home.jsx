@@ -10,6 +10,7 @@ import Modal from "../components/Modal";
 import Form from "../components/Form";
 import { RocketPath } from "../components/Graphics/RocketPath";
 import { Rocket } from "../components/Graphics/Rocket";
+import { RocketPathMobile } from "../components/Graphics/RocketPathMobile";
 import Planet from "../components/Graphics/Planet";
 import { Astronaut } from "../components/Graphics/Astronaut";
 import IconGithub from "../components/Icons/IconGithub";
@@ -99,6 +100,7 @@ function Home() {
         scale: 0.8,
         y: 30,
       });
+      // 로켓 애니메이션
       gsap.to(".rocket", {
         motionPath: {
           path: pathRef.current,
@@ -155,6 +157,42 @@ function Home() {
           markers: false,
         },
       });
+      // 모바일용 // Progress bar 초기 설정
+      // gsap.set(".timeline-progress", {
+      //   strokeDashoffset: "100%",
+      // });
+      // Progress bar 애니메이션
+      // gsap.to(".timeline-progress", {
+      //   strokeDashoffset: "0%",
+      //   scrollTrigger: {
+      //     trigger: ".section04 .inner.m-only",
+      //     start: "top 30%",
+      //     end: "bottom 70%",
+      //     scrub: true,
+      //     onUpdate: (self) => {
+      //       // 진행률에 따라 career 요소들 순차 표시
+      //       const progress = self.progress;
+      //       const careerElements = document.querySelectorAll(".career");
+
+      //       careerElements.forEach((career, index) => {
+      //         const showAt = (index / careerElements.length) * 0.7;
+      //         if (progress >= showAt && career.style.opacity !== "1") {
+      //           gsap.to(career, {
+      //             opacity: 1,
+      //             scale: 1,
+      //             y: 0,
+      //             duration: 0.3,
+      //             ease: "power2.out",
+      //             immediateRender: false,
+      //             overwrite: true,
+      //           });
+      //         }
+      //       });
+      //     },
+      //     ease: "none",
+      //     markers: false,
+      //   },
+      // });
     }
   }, [pathRef]);
 
@@ -183,7 +221,7 @@ function Home() {
       <div className="stars-large"></div>
       {/* section01: introduction */}
       <section className="section section01">
-        <Astronaut className="astronaut" />
+        <Astronaut className="astronaut pc-only" />
         <div className="inner">
           <h2 className="section-title">
             <span className="typing-text">{typingText}</span>
@@ -222,17 +260,24 @@ function Home() {
             Eyes
           </h2>
           <p className="section-contents-text">
+            저는 항상 새로운 것에 도전하는 걸 좋아합니다. 최애 과자를 사러
+            편의점에 가서도, 옆에 처음 보는 과자가 있으면 새로운 걸 고르는
+            타입이에요. 이런 제 호기심은 새로운 기술을 익히는 데에 늘 큰 도움이
+            됩니다. 다른 것보다 프론트엔드를 선택한 이유기도 하고요.
+          </p>
+          {/* <p className="section-contents-text">
             커리어의 첫 시작은 웹 디자이너로 시작하게 되었습니다. 제 작업물이
             실제로 웹 사이트에 반영되는 과정에 흥미를 느꼈고, 그 흥미는 곧장
             마크업과 스타일링을 배워 제 디자인을 직접 구현하는 것으로
-            이어졌습니다. 퍼블리셔로 전직을 한 뒤, 웹 호환성과 웹 접근성 그리고
-            반응형 사이트 제작 등 퍼블리셔로서 필요한 기술들을 배우면서
-            성장해갔고, JavaScript와 jQuery 등 스크립트를 활용한 <br />
-            당시 재직하던 회사에서 Angular를 접하면서 SPA Framework로 개발하기도
+            이어졌습니다. 그 후, 퍼블리셔로 전직을 한 뒤, 웹 호환성과 웹 접근성
+            그리고 반응형 사이트 제작 등 퍼블리셔로서 필요한 기술들을 배우면서
+            성장해 나갔습니다. CSS뿐만이 아니라, JavaScript와 jQuery 등
+            스크립트를 활용해서 인터랙션을 만드는 과정에도 새로운 재미를
+            느꼈습니다. 그 뒤, Angular를 접하면서 SPA Framework를 처음 접하기도
             했습니다. 평소 모든 면에서 새로운 것에 도전하는 걸 좋아하기 때문에,
             새로운 기술을 늘 배울 수 있는 개발의 영역이 매력적으로 다가왔습니다.
             덕분에.......... ㅠㅠ 잘먹고 잘살고싶다..ㅅㅂ
-          </p>
+          </p> */}
         </div>
       </section>
       {/* section03: works */}
@@ -245,14 +290,18 @@ function Home() {
             >
               test1
             </div>
-            <div className="work work02">test2</div>
-            <div className="work work03">test3</div>
+            <div className="work work02" style={{ display: "none" }}>
+              test2
+            </div>
+            <div className="work work03" style={{ display: "none" }}>
+              test3
+            </div>
           </div>
         </div>
       </section>
       {/* section04: career */}
       <section className="section section04">
-        <div className="inner">
+        <div className="inner pc-only">
           <div className="rocket-wrap">
             <RocketPath pathRef={pathRef} className="rocket-path" />
             <Rocket className="rocket" />
@@ -342,14 +391,97 @@ function Home() {
               </div>
             </div>
           </div>
-          {/* <div className="education-section">
-            <h3>주요 교육</h3>
-            <div className="education-item">
-              <span className="period">2021.06 ~ 12</span>
-              <span className="course">스마트웹앱 풀스택 개발 과정</span>
-              <span className="institute">한국소프트웨어인재개발원</span>
-            </div>
+        </div>
+        <div className="inner m-only">
+          {/* <div className="rocket-wrap">
+            <RocketPathMobile className="rocket-path-mobile m-only" />
           </div> */}
+          {/* <div className="timeline-progress"></div> */}
+          <div className="career-wrap">
+            <div className="career career01">
+              {/* <Planet type={"earth"} /> */}
+              <div className="career-info">
+                <div className="period">2016.08 ~ 2017.10</div>
+                <div className="company">아이포터</div>
+                <span className="role">웹 디자이너</span>
+              </div>
+            </div>
+
+            <div className="career career02">
+              {/* <Planet type={"moon"} /> */}
+              <div className="career-info">
+                <div className="period">2018.03 ~ 2018.09</div>
+                <div className="company">투게더앱스</div>
+                <span className="role">웹 디자이너</span>
+              </div>
+            </div>
+
+            <div className="career career03">
+              {/* <Planet type={"mars"} /> */}
+              <div className="career-info">
+                <div className="period">2019.04 ~ 2019.12</div>
+                <div className="company">
+                  지엠솔루션<small>(LG CNS 파견)</small>
+                </div>
+                <span className="role">퍼블리셔</span>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>LG.com 글로벌 마이크로사이트 퍼블리싱</li>
+                    <li>대규모 사이트 유지보수 경험</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="career career04">
+              {/* <Planet type={"saturn"} /> */}
+              <div className="career-info">
+                <div className="period">2020.02 ~ 2021.05</div>
+                <div className="company">어썸코드</div>
+                <span className="role">선임 퍼블리셔</span>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>퍼블리싱 팀 선임, 팀장 대행 역할</li>
+                    <li>
+                      스포츠알마냑<small>(2021.1 오픈)</small> 등 SPA 기반의
+                      신규 프로젝트 UI 개발
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="career career05">
+              {/* <Planet type={"neptune"} /> */}
+              <div className="career-info">
+                <div className="period">2021.12 ~ 2022.09</div>
+                <div className="company">올리브유니온</div>
+                <span className="role">프론트엔드 개발자</span>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>CMS UI 개발 및 프론트엔드 개발</li>
+                    <li>SMS/이메일 인증 등 API 개발</li>
+                    <li>AWS Amplify, S3 호스팅 관리</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="career career06">
+              {/* <Planet type={"sun"} /> */}
+              <div className="career-info">
+                <div className="period">2024.05 ~ 현재</div>
+                <div className="company">금성출판사</div>
+                <span className="role">프론트엔드 개발자</span>
+                <div className="description">
+                  <ul className="description-list">
+                    <li>자사 사이트 유지보수 및 신규 개발</li>
+                    <li>퍼블리싱 및 프론트엔드 개발 전담</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       {/* section05: contact */}
