@@ -254,6 +254,12 @@
             @include mobile {
               width: 100%;
             }
+            // 임시
+            &:not(:first-child) {
+              @include mobile {
+                display: none;
+              }
+            }
           }
         }
       }
